@@ -1,38 +1,38 @@
 {
-	"name": "remix-app-e2e",
-	"$schema": "../../node_modules/nx/schemas/project-schema.json",
-	"sourceRoot": "packages/remix-app-e2e/src",
-	"projectType": "application",
-	"targets": {
-		"e2e": {
-			"executor": "@nx/cypress:cypress",
-			"options": {
-				"cypressConfig": "packages/remix-app-e2e/cypress.config.ts",
-				"baseUrl": "http://localhost:3000",
-				"testingType": "e2e",
-				"skipServe": true
-			},
-			"dependsOn": ["dev-server"]
-		},
-		"lint": {
-			"executor": "@nx/linter:eslint",
-			"outputs": ["{options.outputFile}"],
-			"options": {
-				"lintFilePatterns": ["packages/remix-app-e2e/**/*.{js,ts}"]
-			}
-		},
-		"dev-server": {
-			"command": "nx serve remix-app",
-			"options": {
-				"readyWhen": "Server started"
-			},
-			"configurations": {
-				"production": {
-					"command": "nx serve remix-app --configuration=production"
-				}
-			}
-		}
-	},
-	"tags": [],
-	"implicitDependencies": ["remix-app"]
+  "name": "remix-app-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/remix-app-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "packages/remix-app-e2e/cypress.config.ts",
+        "baseUrl": "http://localhost:3000",
+        "testingType": "e2e",
+        "skipServe": true
+      },
+      "dependsOn": ["dev-server"]
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/remix-app-e2e/**/*.{js,ts}"]
+      }
+    },
+    "dev-server": {
+      "command": "nx serve remix-app",
+      "options": {
+        "readyWhen": "Server started"
+      },
+      "configurations": {
+        "production": {
+          "command": "nx serve remix-app --configuration=production"
+        }
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["remix-app"]
 }
