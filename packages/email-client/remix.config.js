@@ -8,5 +8,6 @@ module.exports = {
   // serverBuildPath: "build/index.js",
   // publicPath: "/build/",
   watchPaths: () => require('@nx/remix').createWatchPaths(__dirname),
-  serverModuleFormat: 'cjs'
+  serverModuleFormat: 'cjs',
+  postcss: true
 };
