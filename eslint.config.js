@@ -26,7 +26,7 @@ module.exports = [
       ],
     },
   },
-  ...compat.config({ extends: ["plugin:@nx/typescript"] }).map((config) => ({
+  ...compat.config({ extends: ["plugin:@nx/typescript", "@remix-run/eslint-config", "@remix-run/eslint-config/node"] }).map((config) => ({
     ...config,
     files: ["**/*.ts", "**/*.tsx"],
     rules: {},

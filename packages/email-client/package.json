@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "remix-app",
+  "name": "email-client",
   "description": "",
   "license": "",
   "scripts": {},
@@ -21,7 +21,7 @@
     "typescript": "^5.2.2"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=18"
   },
   "sideEffects": false
 }

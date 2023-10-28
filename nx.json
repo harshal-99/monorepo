@@ -1,35 +1,45 @@
 {
-  "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "workspaceLayout": {
-    "projectNameAndRootFormat": "as-provided"
-  },
-  "targetDefaults": {
-    "build": {
-      "dependsOn": ["^build"],
-      "inputs": ["production", "^production"],
-      "cache": true
-    },
-    "test": {
-      "inputs": ["default", "^production"],
-      "cache": true
-    },
-    "e2e": {
-      "inputs": ["default", "^production"],
-      "cache": true
-    },
-    "lint": {
-      "cache": true
-    }
-  },
-  "namedInputs": {
-    "default": ["{projectRoot}/**/*", "sharedGlobals"],
-    "production": [
-      "default",
-      "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
-      "!{projectRoot}/tsconfig.spec.json",
-      "!{projectRoot}/eslint.config.js"
-    ],
-    "sharedGlobals": []
-  },
-  "nxCloudAccessToken": "N2VlZTJhNzYtNjFhMS00ZWExLTg3OTItNWRlMWIzMDFjOTQzfHJlYWQtd3JpdGU="
+	"$schema": "./node_modules/nx/schemas/nx-schema.json",
+	"workspaceLayout": {
+		"projectNameAndRootFormat": "as-provided"
+	},
+	"targetDefaults": {
+		"build": {
+			"dependsOn": ["^build"],
+			"inputs": ["production", "^production"],
+			"cache": true
+		},
+		"test": {
+			"inputs": ["default", "^production"],
+			"cache": true
+		},
+		"e2e": {
+			"inputs": ["default", "^production"],
+			"cache": true
+		},
+		"lint": {
+			"cache": true
+		}
+	},
+	"namedInputs": {
+		"default": ["{projectRoot}/**/*", "sharedGlobals"],
+		"production": [
+			"default",
+			"!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
+			"!{projectRoot}/tsconfig.spec.json",
+			"!{projectRoot}/eslint.config.js"
+		],
+		"sharedGlobals": []
+	},
+	"nxCloudAccessToken": "N2VlZTJhNzYtNjFhMS00ZWExLTg3OTItNWRlMWIzMDFjOTQzfHJlYWQtd3JpdGU=",
+	"generators": {
+		"@nx/react": {
+			"application": {
+				"babel": true
+			},
+			"library": {
+				"unitTestRunner": "vitest"
+			}
+		}
+	}
 }
