@@ -1,11 +1,17 @@
-const { FlatCompat } = require("@eslint/eslintrc");
-const nxEslintPlugin = require("@nx/eslint-plugin");
-const js = require("@eslint/js");
+import {FlatCompat} from '@eslint/eslintrc'
+import nxEslintPlugin from '@nx/eslint-plugin'
+import js from '@eslint/js'
+import path from 'path';
+import {fileURLToPath} from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const compat = new FlatCompat({
   baseDirectory: __dirname,
   recommendedConfig: js.configs.recommended,
 });
-module.exports = [
+export default [
   ...compat.extends("prettier"),
   { plugins: { "@nx": nxEslintPlugin } },
   {

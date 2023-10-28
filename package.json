@@ -6,6 +6,7 @@
 		"prepare": "husky install",
 		"postinstall": "pnpm prepare"
 	},
+  "type": "module",
 	"private": true,
 	"devDependencies": {
 		"@babel/core": "^7.14.5",
