@@ -6,7 +6,7 @@
 		"prepare": "husky install",
 		"postinstall": "pnpm prepare"
 	},
-  "type": "module",
+	"type": "module",
 	"private": true,
 	"devDependencies": {
 		"@babel/core": "^7.14.5",
@@ -58,6 +58,7 @@
 		"vitest": "~0.32.0"
 	},
 	"dependencies": {
+		"@emotion/react": "^11.11.1",
 		"@mantine/carousel": "^7.1.7",
 		"@mantine/code-highlight": "^7.1.7",
 		"@mantine/core": "^7.1.7",
@@ -80,8 +81,11 @@
 		"dayjs": "^1.11.10",
 		"embla-carousel-react": "8.0.0-rc14",
 		"isbot": "^3.6.8",
+		"jotai": "^2.5.0",
+		"jotai-devtools": "^0.7.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
-		"tslib": "^2.3.0"
+		"tslib": "^2.3.0",
+		"zod": "^3.22.4"
 	}
 }

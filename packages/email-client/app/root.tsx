@@ -12,6 +12,7 @@ import {
 } from "@remix-run/react";
 
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
+import { DevTools } from "jotai-devtools";
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
@@ -35,6 +36,7 @@ export default function App() {
         <ColorSchemeScript />
       </head>
       <body>
+        <DevTools />
         <MantineProvider>
           <Outlet />
           <ScrollRestoration />
