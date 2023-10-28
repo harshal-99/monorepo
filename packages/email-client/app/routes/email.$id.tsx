@@ -1,3 +1,5 @@
-export default function EmailDetails() {
-  return <div>Email detail</div>;
+import { EmailDetail } from "../shared/email";
+
+export default function EmailBody() {
+  return <EmailDetail />;
 }

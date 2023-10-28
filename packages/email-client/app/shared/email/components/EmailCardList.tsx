@@ -1,5 +1,14 @@
 import { EmailCard } from "./EmailCard";
+import { useAtomValue } from "jotai";
+import { EmailListIdAtom } from "../atoms";
 
 export const EmailCardList = () => {
-  return <EmailCard />;
+  const ids = useAtomValue(EmailListIdAtom);
+  return (
+    <>
+      {ids.map((id) => (
+        <EmailCard key={id} id={id} />
+      ))}
+    </>
+  );
 };
