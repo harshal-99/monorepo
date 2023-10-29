@@ -1,9 +1,9 @@
 import { EmailCard } from "./EmailCard";
 import { useAtomValue } from "jotai";
-import { EmailListIdAtom } from "../atoms";
+import { EmailsToRenderAtom } from "../atoms";
 
 export const EmailCardList = () => {
-  const ids = useAtomValue(EmailListIdAtom);
+  const ids = useAtomValue(EmailsToRenderAtom);
   return (
     <>
       {ids.map((id) => (
