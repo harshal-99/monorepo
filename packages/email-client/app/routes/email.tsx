@@ -35,12 +35,14 @@ export default function EmailLayout() {
   return (
     <Box p={24} w="100%" h="100%">
       <EmailFilter />
-      <Suspense fallback={<div>Loading...</div>}>
-        <Await resolve={list}>
-          <EmailListWrapper />
-        </Await>
-      </Suspense>
-      {id && <Outlet />}
+      <Box display="flex">
+        <Suspense fallback={<div>Loading...</div>}>
+          <Await resolve={list}>
+            <EmailListWrapper />
+          </Await>
+        </Suspense>
+        {id && <Outlet />}
+      </Box>
     </Box>
   );
 }

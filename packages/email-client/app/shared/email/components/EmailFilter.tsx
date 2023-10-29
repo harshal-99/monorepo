@@ -17,7 +17,7 @@ export const EmailFilter = () => {
         alignItems: "center",
       }}
     >
-      <Text>Filter by:</Text>
+      <Text mr={8}>Filter by:</Text>
       <Button.Group>
         <Button
           loading={isPending}
