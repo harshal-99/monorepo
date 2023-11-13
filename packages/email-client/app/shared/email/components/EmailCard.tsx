@@ -1,8 +1,9 @@
-import { FC } from "react";
+import { CSSProperties, FC } from "react";
 import { EmailListAtom } from "../atoms";
 import { useAtomValue } from "jotai";
-import { Anchor } from "@mantine/core";
-import { Link } from "@remix-run/react";
+import { Flex, rem } from "@mantine/core";
+import { UserIcon } from "./UserIcon";
+import { border } from "../colors";
 
 type EmailCardProps = {
   id: string;
@@ -11,10 +12,18 @@ type EmailCardProps = {
 export const EmailCard: FC<EmailCardProps> = ({ id }) => {
   const emails = useAtomValue(EmailListAtom);
   const email = emails.get(id);
+  const styles: CSSProperties = {
+    backgroundColor: "white",
+    borderWidth: rem(1),
+    borderRadius: rem(2),
+    borderColor: border,
+    width: "100%",
+  };
+
   if (!email) return null;
   return (
-    <Anchor component={Link} to={email.id}>
-      <div>Subject {email.subject}</div>
-    </Anchor>
+    <Flex gap={8} py={4} px={32} w="100%" h={"50px"} style={styles}>
+      <UserIcon firstName={email.from.name} />
+    </Flex>
   );
 };

@@ -8,7 +8,9 @@ import {
 import { Box } from "@mantine/core";
 import {
   EmailCardList,
+  EmailCountAtom,
   EmailFilter,
+  EmailListAtom,
   EmailListIdAtom,
   emailListSchema,
   TEmailList,
@@ -17,7 +19,7 @@ import { defer, LoaderFunction } from "@remix-run/node";
 import axios from "axios";
 import { Suspense, useEffect } from "react";
 import { useSetAtom } from "jotai";
-import { EmailCountAtom, EmailListAtom } from "../shared/email";
+import { background } from "../shared/email/colors";
 
 export const loader: LoaderFunction = ({ params }) => {
   const page = params.page ?? 1;
@@ -33,7 +35,7 @@ export default function EmailLayout() {
   const { id } = useParams();
   const { list } = useLoaderData<typeof loader>();
   return (
-    <Box p={24} w="100%" h="100%">
+    <Box p={24} w="100%" h="100%" style={{ backgroundColor: background }}>
       <EmailFilter />
       <Box display="flex">
         <Suspense fallback={<div>Loading...</div>}>

@@ -1,7 +1,7 @@
 import { EmailCard } from "./EmailCard";
 import { useAtomValue } from "jotai";
 import { EmailsToRenderAtom } from "../atoms";
-import { Box } from "@mantine/core";
+import { Flex } from "@mantine/core";
 import { useParams } from "@remix-run/react";
 
 export const EmailCardList = () => {
@@ -9,10 +9,10 @@ export const EmailCardList = () => {
   const { id } = useParams();
 
   return (
-    <Box w={id ? "400" : "100%"}>
+    <Flex direction={"column"} gap={16} w={id ? "400" : "100%"}>
       {ids.map((id) => (
         <EmailCard key={id} id={id} />
       ))}
-    </Box>
+    </Flex>
   );
 };
