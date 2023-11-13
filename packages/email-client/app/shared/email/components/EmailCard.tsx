@@ -1,9 +1,10 @@
-import { CSSProperties, FC } from "react";
+import { CSSProperties, FC, useMemo } from "react";
 import { EmailListAtom } from "../atoms";
 import { useAtomValue } from "jotai";
-import { Flex, rem } from "@mantine/core";
+import { Box, Flex, rem, Text } from "@mantine/core";
 import { UserIcon } from "./UserIcon";
-import { border } from "../colors";
+import { border, text } from "../colors";
+import { Link } from "@remix-run/react";
 
 type EmailCardProps = {
   id: string;
@@ -20,10 +21,46 @@ export const EmailCard: FC<EmailCardProps> = ({ id }) => {
     width: "100%",
   };
 
+  const formatterDate = useMemo(() => {
+    const date = new Date(email?.date ?? "");
+    return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+  }, [email?.date]);
+
+  const TextStyles: CSSProperties = {
+    color: text,
+  };
+
   if (!email) return null;
   return (
-    <Flex gap={8} py={4} px={32} w="100%" h={"50px"} style={styles}>
-      <UserIcon firstName={email.from.name} />
-    </Flex>
+    <Link style={{ textDecoration: "none" }} to={`./${email.id}`}>
+      <Flex gap={24} py={8} px={32} w="100%" style={styles}>
+        <UserIcon firstName={email.from.name} />
+        <Flex direction={"column"}>
+          <Box>
+            <Text component="span" fs={"xs"} style={TextStyles}>
+              From:{" "}
+            </Text>
+            <Text component="span" fs={"xs"} fw={"bold"} style={TextStyles}>
+              {email.from.name} &lt;{email.from.email}&gt;
+            </Text>
+          </Box>
+          <Box>
+            <Text component="span" fs={"xs"} style={TextStyles}>
+              Subject:{" "}
+            </Text>
+            <Text component="span" fs={"xs"} fw={"bold"} style={TextStyles}>
+              {email.subject}
+            </Text>
+          </Box>
+          <Text style={TextStyles} fs={"xs"}>
+            {email.short_description}
+          </Text>
+          <Text style={TextStyles} fs={"xs"}>
+            {formatterDate}
+          </Text>
+          {/* TODO: Implement Favorite status  */}
+        </Flex>
+      </Flex>
+    </Link>
   );
 };
