@@ -35,11 +35,12 @@ export default function EmailLayout() {
   const { id } = useParams();
   const { list } = useLoaderData<typeof loader>();
   return (
-    <Box p={24} w="100%" h="100%" style={{ backgroundColor: background }}>
+    <Box p={24} w="100%" style={{ backgroundColor: background }}>
       <EmailFilter />
       <Box display="flex">
         <Suspense fallback={<div>Loading...</div>}>
           <Await resolve={list}>
+            {/* @ts-expect-error: Type Element is not assignable to type ReactNode */}
             <EmailListWrapper />
           </Await>
         </Suspense>

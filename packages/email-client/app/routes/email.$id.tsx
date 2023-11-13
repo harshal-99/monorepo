@@ -11,6 +11,7 @@ import {
   useAsyncValue,
   useLoaderData,
   useNavigation,
+  useParams,
 } from "@remix-run/react";
 import { Suspense, useEffect } from "react";
 import { useSetAtom } from "jotai";
@@ -32,7 +33,9 @@ export const loader: LoaderFunction = ({ params }) => {
 export default function EmailBody() {
   const { details } = useLoaderData<typeof loader>();
   const { location } = useNavigation();
+  const { id } = useParams();
 
+  if (!id) return null;
   if (location && location.pathname.includes("/email/"))
     return <div>Loading...</div>;
 

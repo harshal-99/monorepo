@@ -81,6 +81,7 @@
 		"axios": "^1.6.0",
 		"dayjs": "^1.11.10",
 		"embla-carousel-react": "8.0.0-rc14",
+		"framer-motion": "^10.16.4",
 		"isbot": "^3.6.8",
 		"jotai": "^2.5.0",
 		"jotai-devtools": "^0.7.0",

@@ -20,7 +20,7 @@ export const links: LinksFunction = () => [
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
+    { title: "Email Client" },
     { name: "description", content: "Welcome to Remix!" },
   ];
 };
