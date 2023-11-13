@@ -39,6 +39,7 @@ export default function EmailBody() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Await resolve={details}>
+        {/* @ts-expect-error: Type `Element` is not assignable to type `ReactNode | ((value: any) => ReactNode)`*/}
         <EmailDetailWrapper />
       </Await>
     </Suspense>

@@ -33,6 +33,7 @@ export const EmailCard: FC<EmailCardProps> = ({ id }) => {
   if (!email) return null;
   return (
     <Link style={{ textDecoration: "none" }} to={`./${email.id}`}>
+      {/* @ts-expect-error: Type Element is not assignable to type ReactNode */}
       <Flex gap={24} py={8} px={32} w="100%" style={styles}>
         <UserIcon firstName={email.from.name} />
         <Flex direction={"column"}>

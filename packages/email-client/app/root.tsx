@@ -11,7 +11,7 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 
-import { MantineProvider, ColorSchemeScript } from "@mantine/core";
+import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import { DevTools } from "jotai-devtools";
 
 export const links: LinksFunction = () => [
@@ -38,10 +38,13 @@ export default function App() {
       <body>
         <DevTools />
         <MantineProvider>
-          <Outlet />
-          <ScrollRestoration />
-          <Scripts />
-          <LiveReload />
+          {/* @ts-expect-error: Type Element is not assignable to type ReactNode*/}
+          <>
+            <Outlet />
+            <ScrollRestoration />
+            <Scripts />
+            <LiveReload />
+          </>
         </MantineProvider>
       </body>
     </html>
