@@ -1,4 +1,5 @@
 import { z } from "zod";
+
 import { emailSchema } from "./email";
 
 export const emailListSchema = z.object({

@@ -1,8 +1,9 @@
 import { atom } from "jotai";
-import { EmailFilterAtom } from "./EmailFilterAtom";
-import { EmailListIdAtom } from "./EmailListIdAtom";
+
 import { EmailDetailsAtom } from "./EmailDetailsAtom";
+import { EmailFilterAtom } from "./EmailFilterAtom";
 import { EmailListAtom } from "./EmailListAtom";
+import { EmailListIdAtom } from "./EmailListIdAtom";
 
 export const EmailsToRenderAtom = atom((get) => {
   const filter = get(EmailFilterAtom);
@@ -21,6 +22,7 @@ export const EmailsToRenderAtom = atom((get) => {
       case "all":
         return true;
       default:
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         throw new Error(`Invalid filter: ${filter}`);
     }
   });

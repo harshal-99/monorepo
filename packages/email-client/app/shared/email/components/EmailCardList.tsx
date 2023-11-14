@@ -1,19 +1,14 @@
-import { EmailCard } from "./EmailCard";
-import { useAtomValue } from "jotai";
-import { EmailsToRenderAtom } from "../atoms";
-import { MantineTransition, rem } from "@mantine/core";
+import { rem } from "@mantine/core";
 import { useParams } from "@remix-run/react";
 import { motion } from "framer-motion";
+import { useAtomValue } from "jotai";
+
+import { EmailCard } from "./EmailCard";
+import { EmailsToRenderAtom } from "../atoms";
 
 export const EmailCardList = () => {
   const ids = useAtomValue(EmailsToRenderAtom);
   const { id } = useParams();
-
-  const animation: MantineTransition = {
-    in: { width: "100%" },
-    out: { width: "400px" },
-    transitionProperty: "width",
-  };
 
   return (
     <motion.div

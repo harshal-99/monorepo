@@ -10,7 +10,12 @@
     "@remix-run/serve": "^2.1.0",
     "isbot": "^3.6.8",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "@mantine/core": "^7.1.7",
+    "framer-motion": "^10.16.4",
+    "jotai": "^2.5.0",
+    "jotai-devtools": "^0.7.0",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@remix-run/dev": "^2.1.0",
@@ -18,7 +23,10 @@
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
     "eslint": "^8.27.0",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3"
   },
   "engines": {
     "node": ">=18"

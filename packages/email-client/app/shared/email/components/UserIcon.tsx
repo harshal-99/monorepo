@@ -1,6 +1,7 @@
 import { Flex, Text } from "@mantine/core";
-import { accent } from "../colors";
 import { FC } from "react";
+
+import { accent } from "../colors";
 
 type UserIconProps = {
   firstName: string;
@@ -17,7 +18,7 @@ export const UserIcon: FC<UserIconProps> = ({ firstName }) => {
       p={4}
       style={{ borderRadius: "999px", backgroundColor: accent }}
     >
-      <Text style={{ color: "white" }} size={"md"}>
+      <Text style={{ color: "white" }} size="md">
         {firstLetter}
       </Text>
     </Flex>

@@ -1,7 +1,8 @@
 import { Box, Button, Text } from "@mantine/core";
 import { useSetAtom } from "jotai";
-import { EmailFilterAtom, TEmailFilterAtom } from "../atoms";
 import { useTransition } from "react";
+
+import { EmailFilterAtom, TEmailFilterAtom } from "../atoms";
 
 export const EmailFilter = () => {
   const setFilter = useSetAtom(EmailFilterAtom);
@@ -19,34 +20,37 @@ export const EmailFilter = () => {
     >
       <Text mr={8}>Filter by:</Text>
       <Button.Group>
-        <Button
-          loading={isPending}
-          loaderProps={{ type: "dots" }}
-          onClick={() => handleFilterChange("all")}
-        >
-          All
-        </Button>
-        <Button
-          loading={isPending}
-          loaderProps={{ type: "dots" }}
-          onClick={() => handleFilterChange("read")}
-        >
-          Read
-        </Button>
-        <Button
-          loading={isPending}
-          loaderProps={{ type: "dots" }}
-          onClick={() => handleFilterChange("unread")}
-        >
-          Unread
-        </Button>
-        <Button
-          loading={isPending}
-          loaderProps={{ type: "dots" }}
-          onClick={() => handleFilterChange("favorites")}
-        >
-          Favriots
-        </Button>
+        {/* @ts-expect-error: Type Element is not assignable to ReactNode*/}
+        <>
+          <Button
+            loading={isPending}
+            loaderProps={{ type: "dots" }}
+            onClick={() => handleFilterChange("all")}
+          >
+            All
+          </Button>
+          <Button
+            loading={isPending}
+            loaderProps={{ type: "dots" }}
+            onClick={() => handleFilterChange("read")}
+          >
+            Read
+          </Button>
+          <Button
+            loading={isPending}
+            loaderProps={{ type: "dots" }}
+            onClick={() => handleFilterChange("unread")}
+          >
+            Unread
+          </Button>
+          <Button
+            loading={isPending}
+            loaderProps={{ type: "dots" }}
+            onClick={() => handleFilterChange("favorites")}
+          >
+            Favorites
+          </Button>
+        </>
       </Button.Group>
     </Box>
   );

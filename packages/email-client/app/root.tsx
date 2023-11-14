@@ -1,5 +1,7 @@
 import "@mantine/core/styles.css";
 
+import { ColorSchemeScript, MantineProvider } from "@mantine/core";
+// eslint-disable-next-line import/no-unresolved
 import { cssBundleHref } from "@remix-run/css-bundle";
 import type { LinksFunction, MetaFunction } from "@remix-run/node";
 import {
@@ -10,11 +12,10 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-
-import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import { DevTools } from "jotai-devtools";
 
 export const links: LinksFunction = () => [
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
 ];
 
@@ -25,6 +26,7 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+// eslint-disable-next-line import/no-default-export
 export default function App() {
   return (
     <html lang="en">
