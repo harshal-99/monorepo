@@ -1,10 +1,11 @@
-import { CSSProperties, FC, useMemo } from "react";
-import { EmailListAtom } from "../atoms";
-import { useAtomValue } from "jotai";
 import { Box, Flex, rem, Text } from "@mantine/core";
-import { UserIcon } from "./UserIcon";
-import { border, text } from "../colors";
 import { Link } from "@remix-run/react";
+import { useAtomValue } from "jotai";
+import { CSSProperties, FC, useMemo } from "react";
+
+import { UserIcon } from "./UserIcon";
+import { EmailListAtom } from "../atoms";
+import { border, text } from "../colors";
 
 type EmailCardProps = {
   id: string;
@@ -36,27 +37,27 @@ export const EmailCard: FC<EmailCardProps> = ({ id }) => {
       {/* @ts-expect-error: Type Element is not assignable to type ReactNode */}
       <Flex gap={24} py={8} px={32} w="100%" style={styles}>
         <UserIcon firstName={email.from.name} />
-        <Flex direction={"column"}>
+        <Flex direction="column">
           <Box>
-            <Text component="span" fs={"xs"} style={TextStyles}>
+            <Text component="span" fs="xs" style={TextStyles}>
               From:{" "}
             </Text>
-            <Text component="span" fs={"xs"} fw={"bold"} style={TextStyles}>
+            <Text component="span" fs="xs" fw="bold" style={TextStyles}>
               {email.from.name} &lt;{email.from.email}&gt;
             </Text>
           </Box>
           <Box>
-            <Text component="span" fs={"xs"} style={TextStyles}>
+            <Text component="span" fs="xs" style={TextStyles}>
               Subject:{" "}
             </Text>
-            <Text component="span" fs={"xs"} fw={"bold"} style={TextStyles}>
+            <Text component="span" fs="xs" fw="bold" style={TextStyles}>
               {email.subject}
             </Text>
           </Box>
-          <Text style={TextStyles} fs={"xs"}>
+          <Text style={TextStyles} fs="xs">
             {email.short_description}
           </Text>
-          <Text style={TextStyles} fs={"xs"}>
+          <Text style={TextStyles} fs="xs">
             {formatterDate}
           </Text>
           {/* TODO: Implement Favorite status  */}

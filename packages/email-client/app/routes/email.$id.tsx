@@ -1,11 +1,4 @@
-import {
-  EmailDetail,
-  EmailDetailsAtom,
-  emailDetailSchema,
-  TEmailDetail,
-} from "../shared/email";
 import { defer, LoaderFunction } from "@remix-run/node";
-import axios from "axios";
 import {
   Await,
   useAsyncValue,
@@ -13,8 +6,16 @@ import {
   useNavigation,
   useParams,
 } from "@remix-run/react";
-import { Suspense, useEffect } from "react";
+import axios from "axios";
 import { useSetAtom } from "jotai";
+import { Suspense, useEffect } from "react";
+
+import {
+  EmailDetail,
+  EmailDetailsAtom,
+  emailDetailSchema,
+  TEmailDetail,
+} from "../shared/email";
 
 export const loader: LoaderFunction = ({ params }) => {
   const { id } = params;
@@ -30,8 +31,9 @@ export const loader: LoaderFunction = ({ params }) => {
     { headers }
   );
 };
+// eslint-disable-next-line import/no-default-export
 export default function EmailBody() {
-  const { details } = useLoaderData<typeof loader>();
+  const { details } = useLoaderData() as { details: TEmailDetail };
   const { location } = useNavigation();
   const { id } = useParams();
 
