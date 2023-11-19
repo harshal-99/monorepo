@@ -15,9 +15,9 @@ import data from "./data.json";
 import {
   filterData,
   getBarChartOptions,
-  getInitialAge,
-  getInitialDates,
-  getInitialGender,
+  parseAge,
+  parseDate,
+  parseGender,
   getMinAndMaxDates,
 } from "../shared/chart/chartUtils";
 import { ChartArraySchema, TChartData } from "../shared/chart/types/chart";
@@ -35,20 +35,16 @@ export default function Chart() {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const data = useLoaderData() as TChartData[];
-
-  const [dateRange, setDateRange] = useState<DateRange>(
-    getInitialDates(searchParams.get("startDate"), searchParams.get("endDate"))
-  );
+  const gender = parseGender(searchParams.get("gender"));
+  const age = parseAge(searchParams.get("age"));
+  const [dateRange, setDateRange] = useState<DateRange>([
+    parseDate(searchParams.get("startDate")),
+    parseDate(searchParams.get("endDate")),
+  ]);
   const [chartInstance, setChartInstance] = useState<echarts.ECharts | null>(
     null
   );
-  const [genderRadio, setGenderRadio] = useState<TChartData["Gender"]>(
-    getInitialGender(searchParams.get("gender"))
-  );
-  const [ageRange, setAgeRange] = useState<TChartData["Age"]>(
-    getInitialAge(searchParams.get("age"))
-  );
-  const dataToDisplay = filterData(data, dateRange, genderRadio, ageRange);
+  const dataToDisplay = filterData(data, dateRange, gender, age);
   const { min, max } = useMemo(() => getMinAndMaxDates(data), [data]);
   const updateChart = (
     date: DateRange,
@@ -75,8 +71,7 @@ export default function Chart() {
   };
   const handleGenderChange = (value: string) => {
     if (value === "Male" || value === "Female") {
-      setGenderRadio(value);
-      updateChart(dateRange, value, ageRange);
+      updateChart(dateRange, value, age);
       setSearchParams((prevParams) => {
         prevParams.set("gender", value);
         return prevParams;
@@ -86,8 +81,7 @@ export default function Chart() {
 
   const handleAgeChange = (value: string) => {
     if (value === ">25" || value === "15-25") {
-      setAgeRange(value);
-      updateChart(dateRange, genderRadio, value);
+      updateChart(dateRange, gender, value);
       setSearchParams((prevParam) => {
         prevParam.set("age", value);
         return prevParam;
@@ -97,7 +91,7 @@ export default function Chart() {
 
   const handleDateChange = (value: [Date | null, Date | null]) => {
     setDateRange(value);
-    updateChart(value, genderRadio, ageRange);
+    updateChart(value, gender, age);
     setSearchParams((prevParam) => {
       prevParam.set("startDate", value[0]?.getTime()?.toString() ?? "");
       prevParam.set("endDate", value[1]?.getTime()?.toString() ?? "");
@@ -117,7 +111,7 @@ export default function Chart() {
 
   return (
     <>
-      <Flex>
+      <Flex p={8}>
         <ReactECharts
           style={{ width: "100%" }}
           option={getBarChartOptions(dataToDisplay)}
@@ -127,7 +121,7 @@ export default function Chart() {
           <Flex>
             <Radio.Group
               name="Select Gender"
-              value={genderRadio}
+              value={gender}
               onChange={handleGenderChange}
             >
               <Group>
@@ -137,7 +131,7 @@ export default function Chart() {
             </Radio.Group>
             <Radio.Group
               name="Select Age range"
-              value={ageRange}
+              value={age}
               onChange={handleAgeChange}
             >
               <Group>

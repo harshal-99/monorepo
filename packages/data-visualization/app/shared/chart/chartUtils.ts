@@ -4,14 +4,12 @@ import * as echarts from "echarts";
 import { DataKeys, TChartData } from "./types/chart";
 import { DateRange } from "./types/DateRange";
 
-export const getInitialGender = (
-  gender: string | null
-): TChartData["Gender"] => {
+export const parseGender = (gender: string | null): TChartData["Gender"] => {
   if (gender === "Male" || gender === "Female") return gender;
   return "Male";
 };
 
-export const getInitialAge = (age: string | null): TChartData["Age"] => {
+export const parseAge = (age: string | null): TChartData["Age"] => {
   if (age === ">25" || age === "15-25") return age;
   return "15-25";
 };
@@ -105,11 +103,9 @@ export const getMinAndMaxDates = (
   };
 };
 
-export const getInitialDates = (
-  start: string | null,
-  end: string | null
-): DateRange => {
-  const startDate = start ? new Date(Number(start)) : null;
-  const endDate = end ? new Date(Number(end)) : null;
-  return [startDate, endDate];
+export const parseDate = (date: string | null): Date | null => {
+  if (date === null) return null;
+  const parsedDate = parseInt(date, 10);
+  if (isNaN(parsedDate)) return null;
+  return new Date(parsedDate);
 };
