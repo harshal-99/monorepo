@@ -105,7 +105,7 @@ export default function Chart() {
     setChartInstance(instance);
     instance.on("click", "series", function (params) {
       console.log(params);
-      navigate(params.name);
+      navigate(params.name + "?" + searchParams.toString());
     });
   };
 
