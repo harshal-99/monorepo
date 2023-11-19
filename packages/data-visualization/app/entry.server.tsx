@@ -9,6 +9,7 @@ export default function (
   responseHeaders: Headers,
   remixContext: EntryContext
 ) {
+  // @ts-expect-error: The types of staticHandlerContext.activeDeferreds are incompatible between these types.
   const remixServer = <RemixServer context={remixContext} url={request.url} />;
   return handleRequest(
     request,
