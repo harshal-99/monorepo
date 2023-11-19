@@ -264,6 +264,9 @@ importers:
       '@mantine/core':
         specifier: ^7.1.7
         version: 7.1.7(@mantine/hooks@7.1.7)(@types/react@18.2.24)(react-dom@18.2.0)(react@18.2.0)
+      '@mantine/dates':
+        specifier: ^7.1.7
+        version: 7.1.7(@mantine/core@7.1.7)(@mantine/hooks@7.1.7)(dayjs@1.11.10)(react-dom@18.2.0)(react@18.2.0)
       '@remix-run/node':
         specifier: ^2.3.0
         version: 2.3.0(typescript@5.2.2)
@@ -279,6 +282,9 @@ importers:
       axios:
         specifier: ^1.6.0
         version: 1.6.0
+      dayjs:
+        specifier: ^1.11.10
+        version: 1.11.10
       echarts:
         specifier: ^5.4.3
         version: 5.4.3

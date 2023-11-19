@@ -1,4 +1,5 @@
 import "@mantine/core/styles.css";
+import "@mantine/dates/styles.css";
 
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 // eslint-disable-next-line import/no-unresolved

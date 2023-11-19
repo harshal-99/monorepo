@@ -1,4 +1,5 @@
 import { Flex, Group, Radio } from "@mantine/core";
+import { DatePickerInput } from "@mantine/dates";
 import { json, LoaderFunction } from "@remix-run/node";
 import {
   Outlet,
@@ -8,16 +9,19 @@ import {
 } from "@remix-run/react";
 import * as echarts from "echarts";
 import ReactECharts from "echarts-for-react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import data from "./data.json";
 import {
   filterData,
   getBarChartOptions,
   getInitialAge,
+  getInitialDates,
   getInitialGender,
+  getMinAndMaxDates,
 } from "../shared/chart/chartUtils";
 import { ChartArraySchema, TChartData } from "../shared/chart/types/chart";
+import { DateRange } from "../shared/chart/types/DateRange";
 
 export const loader: LoaderFunction = () => {
   const headers = new Headers();
@@ -31,7 +35,10 @@ export default function Chart() {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const data = useLoaderData() as TChartData[];
-  const date = "4/10/2022";
+
+  const [dateRange, setDateRange] = useState<DateRange>(
+    getInitialDates(searchParams.get("startDate"), searchParams.get("endDate"))
+  );
   const [chartInstance, setChartInstance] = useState<echarts.ECharts | null>(
     null
   );
@@ -41,10 +48,10 @@ export default function Chart() {
   const [ageRange, setAgeRange] = useState<TChartData["Age"]>(
     getInitialAge(searchParams.get("age"))
   );
-  const dataToDisplay = filterData(data, date, genderRadio, ageRange);
-
+  const dataToDisplay = filterData(data, dateRange, genderRadio, ageRange);
+  const { min, max } = useMemo(() => getMinAndMaxDates(data), [data]);
   const updateChart = (
-    date: string,
+    date: DateRange,
     gender: TChartData["Gender"],
     age: TChartData["Age"]
   ) => {
@@ -69,7 +76,7 @@ export default function Chart() {
   const handleGenderChange = (value: string) => {
     if (value === "Male" || value === "Female") {
       setGenderRadio(value);
-      updateChart(date, value, ageRange);
+      updateChart(dateRange, value, ageRange);
       setSearchParams((prevParams) => {
         prevParams.set("gender", value);
         return prevParams;
@@ -80,12 +87,22 @@ export default function Chart() {
   const handleAgeChange = (value: string) => {
     if (value === ">25" || value === "15-25") {
       setAgeRange(value);
-      updateChart(date, genderRadio, value);
+      updateChart(dateRange, genderRadio, value);
       setSearchParams((prevParam) => {
         prevParam.set("age", value);
         return prevParam;
       });
     }
+  };
+
+  const handleDateChange = (value: [Date | null, Date | null]) => {
+    setDateRange(value);
+    updateChart(value, genderRadio, ageRange);
+    setSearchParams((prevParam) => {
+      prevParam.set("startDate", value[0]?.getTime()?.toString() ?? "");
+      prevParam.set("endDate", value[1]?.getTime()?.toString() ?? "");
+      return prevParam;
+    });
   };
 
   const setChart = (e: ReactECharts | null) => {
@@ -106,26 +123,38 @@ export default function Chart() {
           option={getBarChartOptions(dataToDisplay)}
           ref={setChart}
         />
-        <Radio.Group
-          name="Select Gender"
-          value={genderRadio}
-          onChange={handleGenderChange}
-        >
-          <Group>
-            <Radio value="Male" label="Male" />
-            <Radio value="Female" label="Female" />
-          </Group>
-        </Radio.Group>
-        <Radio.Group
-          name="Select Age range"
-          value={ageRange}
-          onChange={handleAgeChange}
-        >
-          <Group>
-            <Radio value=">25" label=">25" />
-            <Radio value="15-25" label="15-25" />
-          </Group>
-        </Radio.Group>
+        <Flex direction="column">
+          <Flex>
+            <Radio.Group
+              name="Select Gender"
+              value={genderRadio}
+              onChange={handleGenderChange}
+            >
+              <Group>
+                <Radio value="Male" label="Male" />
+                <Radio value="Female" label="Female" />
+              </Group>
+            </Radio.Group>
+            <Radio.Group
+              name="Select Age range"
+              value={ageRange}
+              onChange={handleAgeChange}
+            >
+              <Group>
+                <Radio value=">25" label=">25" />
+                <Radio value="15-25" label="15-25" />
+              </Group>
+            </Radio.Group>
+          </Flex>
+          <DatePickerInput
+            type="range"
+            label="Pick date range"
+            value={dateRange}
+            onChange={handleDateChange}
+            minDate={min.toDate()}
+            maxDate={max.toDate()}
+          />
+        </Flex>
       </Flex>
       <Outlet />
     </>

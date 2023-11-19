@@ -1,6 +1,8 @@
+import dayjs, { Dayjs } from "dayjs";
 import * as echarts from "echarts";
 
 import { DataKeys, TChartData } from "./types/chart";
+import { DateRange } from "./types/DateRange";
 
 export const getInitialGender = (
   gender: string | null
@@ -14,16 +16,33 @@ export const getInitialAge = (age: string | null): TChartData["Age"] => {
   return "15-25";
 };
 
+const toDayJs = (date: string): Dayjs => {
+  const [day, month, year] = date.split("/");
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+  return dayjs(`${year}-${month}-${day}`) as Dayjs;
+};
+
+const filterDate = (date: string, range: DateRange): boolean => {
+  const day: Dayjs = toDayJs(date);
+  const [min, max] = range;
+  if (!min || !max) return true;
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+  const minDay: Dayjs = dayjs(min) as Dayjs;
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+  const maxDay: Dayjs = dayjs(max) as Dayjs;
+  return minDay.isBefore(day) && maxDay.isAfter(day);
+};
+
 export const filterData = (
   data: TChartData[],
-  date: string,
+  date: DateRange,
   gender: TChartData["Gender"],
   age: TChartData["Age"]
 ) => {
   return data
     .filter((d) => d.Age === age)
     .filter((d) => d.Gender === gender)
-    .filter((d) => d.Day === date)
+    .filter((d) => filterDate(d.Day, date))
     .reduce(
       (acc, value) => {
         DataKeys.forEach((key) => {
@@ -60,4 +79,37 @@ export const getBarChartOptions = (
       },
     ],
   };
+};
+
+export const getMinAndMaxDates = (
+  data: TChartData[]
+): {
+  min: Dayjs;
+  max: Dayjs;
+} => {
+  const dates: dayjs.Dayjs[] = data.map((d) => toDayJs(d.Day));
+
+  dates.sort((a: dayjs.Dayjs, b: dayjs.Dayjs) => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-call
+    if (a.isBefore(b)) return -1;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-call
+    if (a.isAfter(b)) return 1;
+    return 0;
+  });
+
+  return {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    min: dates[0],
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-assignment
+    max: dates.at(-1) ?? (dayjs() as Dayjs),
+  };
+};
+
+export const getInitialDates = (
+  start: string | null,
+  end: string | null
+): DateRange => {
+  const startDate = start ? new Date(Number(start)) : null;
+  const endDate = end ? new Date(Number(end)) : null;
+  return [startDate, endDate];
 };
