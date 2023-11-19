@@ -1,4 +1,4 @@
-import { RemixServer } from "@remix-run/react";
+/*import { RemixServer } from "@remix-run/react";
 import { handleRequest } from "@vercel/remix";
 import type { EntryContext } from "@vercel/remix";
 
@@ -17,9 +17,8 @@ export default function (
     responseHeaders,
     remixServer
   );
-}
+}*/
 
-/*
 import type { AppLoadContext, EntryContext } from "@remix-run/node";
 import { createReadableStreamFromReadable } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
@@ -154,4 +153,3 @@ function handleBrowserRequest(
     setTimeout(abort, ABORT_DELAY);
   });
 }
-*/

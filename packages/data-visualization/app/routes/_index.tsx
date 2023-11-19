@@ -1,4 +1,4 @@
-import { LoaderFunction, redirect } from "@vercel/remix";
+import { LoaderFunction, redirect } from "@remix-run/node";
 
 export const loader: LoaderFunction = () => {
   return redirect("/chart");

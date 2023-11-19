@@ -1,5 +1,6 @@
 import { Flex, Group, Radio } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
+import { json, LoaderFunction } from "@remix-run/node";
 import {
   Link,
   Outlet,
@@ -7,7 +8,6 @@ import {
   useNavigate,
   useSearchParams,
 } from "@remix-run/react";
-import { json, LoaderFunction } from "@vercel/remix";
 import * as echarts from "echarts";
 import ReactECharts from "echarts-for-react";
 import { useMemo, useState } from "react";
