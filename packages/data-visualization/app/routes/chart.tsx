@@ -1,5 +1,6 @@
-import { Flex, Group, Radio } from "@mantine/core";
+import { Flex, Group, Radio, em, rem } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
+import { useMediaQuery } from "@mantine/hooks";
 import { json, LoaderFunction } from "@remix-run/node";
 import {
   Link,
@@ -47,6 +48,7 @@ export default function Chart() {
   );
   const dataToDisplay = filterBarChartData(data, dateRange, gender, age);
   const { min, max } = useMemo(() => getMinAndMaxDates(data), [data]);
+  const isMobile = useMediaQuery(`(max-width: ${em(1080)})`);
   const updateChart = (
     date: DateRange,
     gender: TChartData["Gender"],
@@ -112,14 +114,14 @@ export default function Chart() {
   return (
     <>
       <Link to="/chart">Reset chart</Link>
-      <Flex p={8}>
+      <Flex p={8} direction={isMobile ? "column" : "row"}>
         <ReactECharts
           style={{ width: "100%" }}
           option={getBarChartOptions(dataToDisplay)}
           ref={setChart}
         />
         <Flex direction="column">
-          <Flex>
+          <Flex gap={rem(8)}>
             <Radio.Group
               name="Select Gender"
               value={gender}
