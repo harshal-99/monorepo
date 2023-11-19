@@ -20,7 +20,7 @@
     },
     "start": {
       "dependsOn": ["build"],
-      "command": "remix-serve build",
+      "command": "remix-serve build/index.js",
       "options": {
         "cwd": "packages/data-visualization"
       }
