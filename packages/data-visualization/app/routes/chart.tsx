@@ -2,6 +2,7 @@ import { Flex, Group, Radio } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
 import { json, LoaderFunction } from "@remix-run/node";
 import {
+  Link,
   Outlet,
   useLoaderData,
   useNavigate,
@@ -13,7 +14,7 @@ import { useMemo, useState } from "react";
 
 import data from "./data.json";
 import {
-  filterData,
+  filterBarChartData,
   getBarChartOptions,
   parseAge,
   parseDate,
@@ -44,14 +45,14 @@ export default function Chart() {
   const [chartInstance, setChartInstance] = useState<echarts.ECharts | null>(
     null
   );
-  const dataToDisplay = filterData(data, dateRange, gender, age);
+  const dataToDisplay = filterBarChartData(data, dateRange, gender, age);
   const { min, max } = useMemo(() => getMinAndMaxDates(data), [data]);
   const updateChart = (
     date: DateRange,
     gender: TChartData["Gender"],
     age: TChartData["Age"]
   ) => {
-    const newData = filterData(data, date, gender, age);
+    const newData = filterBarChartData(data, date, gender, age);
     if (!newData || !chartInstance) return;
     chartInstance.setOption({
       series: [
@@ -104,13 +105,13 @@ export default function Chart() {
     const instance = e.getEchartsInstance();
     setChartInstance(instance);
     instance.on("click", "series", function (params) {
-      console.log(params);
       navigate(params.name + "?" + searchParams.toString());
     });
   };
 
   return (
     <>
+      <Link to="/chart">Reset chart</Link>
       <Flex p={8}>
         <ReactECharts
           style={{ width: "100%" }}

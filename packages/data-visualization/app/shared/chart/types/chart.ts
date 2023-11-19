@@ -17,3 +17,4 @@ export const ChartArraySchema = z.array(ChartDataSchema);
 export type TChartData = z.infer<typeof ChartDataSchema>;
 
 export const DataKeys = ["A", "B", "C", "D", "E", "F"] as const;
+export type DataKey = (typeof DataKeys)[number];

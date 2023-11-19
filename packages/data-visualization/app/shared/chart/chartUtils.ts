@@ -1,7 +1,7 @@
 import dayjs, { Dayjs } from "dayjs";
 import * as echarts from "echarts";
 
-import { DataKeys, TChartData } from "./types/chart";
+import { DataKey, DataKeys, TChartData } from "./types/chart";
 import { DateRange } from "./types/DateRange";
 
 export const parseGender = (gender: string | null): TChartData["Gender"] => {
@@ -31,7 +31,7 @@ const filterDate = (date: string, range: DateRange): boolean => {
   return minDay.isBefore(day) && maxDay.isAfter(day);
 };
 
-export const filterData = (
+export const filterBarChartData = (
   data: TChartData[],
   date: DateRange,
   gender: TChartData["Gender"],
@@ -79,6 +79,52 @@ export const getBarChartOptions = (
   };
 };
 
+export const getLineChartOptions = (
+  data: TChartData[],
+  id: DataKey
+): echarts.EChartsOption => {
+  return {
+    xAxis: {
+      type: "category",
+      nameLocation: "middle",
+      nameGap: 25,
+      name: "Dates",
+      data: data.map((d) => d.Day),
+      axisLabel: {
+        formatter: (value: string) => {
+          return toDayJs(value).format("DD-MMM");
+        },
+      },
+    },
+    yAxis: {
+      type: "value",
+      name: "Time spend",
+      nameLocation: "middle",
+      nameGap: 40,
+    },
+    dataZoom: [
+      {
+        type: "inside",
+        throttle: 50,
+      },
+    ],
+    series: [
+      {
+        type: "line",
+        data: data.map((d) => d[id]),
+      },
+    ],
+    toolbox: {
+      feature: {
+        dataZoom: {
+          yAxisIndex: "none",
+        },
+        restore: {},
+      },
+    },
+  };
+};
+
 export const getMinAndMaxDates = (
   data: TChartData[]
 ): {
@@ -108,4 +154,14 @@ export const parseDate = (date: string | null): Date | null => {
   const parsedDate = parseInt(date, 10);
   if (isNaN(parsedDate)) return null;
   return new Date(parsedDate);
+};
+
+export const filterLineChartData = (
+  id: string | undefined,
+  data: TChartData[],
+  gender: TChartData["Gender"],
+  age: TChartData["Age"]
+) => {
+  if (!id || !data) return [];
+  return data.filter((d) => d.Age === age).filter((d) => d.Gender === gender);
 };
