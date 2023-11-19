@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "preinstall": "corepack enable && corepack prepare pnpm@latest --activate",
     "prepare": "husky install",
     "postinstall": "pnpm prepare"
   },
