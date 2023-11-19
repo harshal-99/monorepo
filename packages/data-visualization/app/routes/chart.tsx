@@ -1,11 +1,11 @@
 import { Flex, Group, Radio } from "@mantine/core";
+import { json, LoaderFunction } from "@remix-run/node";
 import {
   Outlet,
   useLoaderData,
   useNavigate,
   useSearchParams,
 } from "@remix-run/react";
-import { json, LoaderFunction } from "@vercel/remix";
 import * as echarts from "echarts";
 import ReactECharts from "echarts-for-react";
 import { useState } from "react";
