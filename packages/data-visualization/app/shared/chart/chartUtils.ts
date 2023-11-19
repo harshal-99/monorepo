@@ -84,6 +84,9 @@ export const getLineChartOptions = (
   id: DataKey
 ): echarts.EChartsOption => {
   return {
+    title: {
+      text: `Feature ${id}`,
+    },
     xAxis: {
       type: "category",
       nameLocation: "middle",
