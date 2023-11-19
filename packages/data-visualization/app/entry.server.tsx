@@ -1,3 +1,24 @@
+import { RemixServer } from "@remix-run/react";
+import { handleRequest } from "@vercel/remix";
+import type { EntryContext } from "@vercel/remix";
+
+// eslint-disable-next-line import/no-default-export
+export default function (
+  request: Request,
+  responseStatusCode: number,
+  responseHeaders: Headers,
+  remixContext: EntryContext
+) {
+  const remixServer = <RemixServer context={remixContext} url={request.url} />;
+  return handleRequest(
+    request,
+    responseStatusCode,
+    responseHeaders,
+    remixServer
+  );
+}
+
+/*
 import type { AppLoadContext, EntryContext } from "@remix-run/node";
 import { createReadableStreamFromReadable } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
@@ -132,3 +153,4 @@ function handleBrowserRequest(
     setTimeout(abort, ABORT_DELAY);
   });
 }
+*/

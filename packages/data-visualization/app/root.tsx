@@ -4,7 +4,6 @@ import "@mantine/dates/styles.css";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 // eslint-disable-next-line import/no-unresolved
 import { cssBundleHref } from "@remix-run/css-bundle";
-import type { LinksFunction, MetaFunction } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -13,6 +12,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import type { LinksFunction, MetaFunction } from "@vercel/remix";
 import { DevTools } from "jotai-devtools";
 
 export const links: LinksFunction = () => [
