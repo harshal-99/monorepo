@@ -8,6 +8,7 @@ module.exports = {
     "plugin:storybook/recommended",
     "plugin:import/recommended",
     "plugin:jsx-a11y/recommended",
+    "mantine",
     "prettier",
   ],
   plugins: ["react", "react-hooks", "storybook", "import", "jsx-a11y"],
@@ -29,6 +30,7 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
+    project: "./tsconfig.base.json",
   },
   ignorePatterns: [
     "!*.js",
@@ -95,6 +97,7 @@ module.exports = {
     ],
     "import/no-default-export": "error",
     "import/no-extraneous-dependencies": "error",
+    "react/react-in-jsx-scope": "off",
   },
   overrides: [
     {
