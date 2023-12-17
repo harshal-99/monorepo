@@ -1,6 +1,11 @@
 /// <reference types='vitest' />
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { nxViteTsPaths } from "@nx/vite/plugins/nx-tsconfig-paths.plugin";
+// eslint-disable-next-line import/no-extraneous-dependencies
 import react from "@vitejs/plugin-react";
+import jotaiDebugLabel from "jotai/babel/plugin-debug-label";
+import jotaiReactRefresh from "jotai/babel/plugin-react-refresh";
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { defineConfig } from "vite";
 
 // eslint-disable-next-line import/no-default-export
@@ -17,7 +22,10 @@ export default defineConfig({
     host: "localhost",
   },
 
-  plugins: [react(), nxViteTsPaths()],
+  plugins: [
+    react({ babel: { plugins: [jotaiDebugLabel, jotaiReactRefresh] } }),
+    nxViteTsPaths(),
+  ],
 
   // Uncomment this if you are using workers.
   // worker: {
