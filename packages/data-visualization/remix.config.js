@@ -1,6 +1,8 @@
 /**
  * @type {import('@remix-run/dev').AppConfig}
  */
+
+/* eslint-disable */
 module.exports = {
   ignoredRouteFiles: ["**/.*"],
   // appDirectory: "app",
@@ -9,4 +11,7 @@ module.exports = {
   // publicPath: "/build/",
   watchPaths: () => require("@nx/remix").createWatchPaths(__dirname),
   serverModuleFormat: "cjs",
+  browserNodeBuiltinsPolyfill: {
+    modules: { os: true, path: true, crypto: true, process: true },
+  },
 };
