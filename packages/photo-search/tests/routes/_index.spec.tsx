@@ -1,6 +1,6 @@
 import { createRemixStub } from "@remix-run/testing";
 import { render, screen, waitFor } from "@testing-library/react";
-
+import { test } from "vitest";
 import Index from "../../app/routes/_index";
 
 test("renders loader data", async () => {

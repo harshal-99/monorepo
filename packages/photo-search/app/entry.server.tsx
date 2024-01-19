@@ -1,7 +1,6 @@
 import type { EntryContext } from "@remix-run/node";
 import { createReadableStreamFromReadable } from "@remix-run/node";
 import { RemixServer } from "@remix-run/react";
-// @ts-expect-error enable esModuleInterop
 import isbot from "isbot";
 import { PassThrough } from "node:stream";
 import { renderToPipeableStream } from "react-dom/server";

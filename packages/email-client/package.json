@@ -6,9 +6,9 @@
   "scripts": {},
   "dependencies": {
     "@mantine/core": "^7.1.7",
-    "@remix-run/node": "^2.1.0",
-    "@remix-run/react": "^2.1.0",
-    "@remix-run/serve": "^2.1.0",
+    "@remix-run/node": "^2.5.1",
+    "@remix-run/react": "^2.5.1",
+    "@remix-run/serve": "^2.5.1",
     "axios": "^1.6.0",
     "framer-motion": "^10.16.4",
     "isbot": "^3.6.8",
@@ -19,8 +19,8 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
-    "@remix-run/dev": "^2.1.0",
-    "@remix-run/eslint-config": "^2.1.0",
+    "@remix-run/dev": "^2.5.1",
+    "@remix-run/eslint-config": "^2.5.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
