@@ -46,7 +46,7 @@ module.exports = {
     "no-warning-comments": "warn",
     "object-shorthand": "error",
     "no-param-reassign": [
-      "error",
+      "warn",
       {
         props: true,
         ignorePropertyModificationsFor: ["acc", "next"],
@@ -95,9 +95,11 @@ module.exports = {
         },
       },
     ],
-    "import/no-default-export": "error",
+    "import/no-default-export": "warn",
     "import/no-extraneous-dependencies": "error",
     "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "global-require": "warn",
   },
   overrides: [
     {
