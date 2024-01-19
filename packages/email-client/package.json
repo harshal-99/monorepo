@@ -5,7 +5,7 @@
   "license": "",
   "scripts": {},
   "dependencies": {
-    "@mantine/core": "^7.1.7",
+    "@mantine/core": "^7.4.2",
     "@remix-run/node": "^2.5.1",
     "@remix-run/react": "^2.5.1",
     "@remix-run/serve": "^2.5.1",
