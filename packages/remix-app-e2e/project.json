@@ -16,10 +16,7 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["packages/remix-app-e2e/**/*.{js,ts}"]
-      }
+      "outputs": ["{options.outputFile}"]
     },
     "dev-server": {
       "command": "nx serve remix-app",

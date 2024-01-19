@@ -10,6 +10,14 @@ import { defineConfig } from "vite";
 
 // eslint-disable-next-line import/no-default-export
 export default defineConfig({
+  root: __dirname,
+  build: {
+    outDir: "../../dist/packages/sortable-list-component",
+    reportCompressedSize: true,
+    commonjsOptions: {
+      transformMixedEsModules: true,
+    },
+  },
   cacheDir: "../../node_modules/.vite/sortable-list-component",
 
   server: {
@@ -33,6 +41,11 @@ export default defineConfig({
   // },
 
   test: {
+    reporters: ["default"],
+    coverage: {
+      reportsDirectory: "../../coverage/packages/sortable-list-component",
+      provider: "v8",
+    },
     globals: true,
     cache: {
       dir: "../../node_modules/.vitest",
